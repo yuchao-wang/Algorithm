@@ -8,4 +8,7 @@ public class BinaryTree {
     public BinaryTree left;
     public BinaryTree right;
 
+    public BinaryTree(int data) {
+        this.data = data;
+    }
 }
