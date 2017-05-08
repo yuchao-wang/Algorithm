@@ -5,9 +5,9 @@ import java.util.Stack;
 /**
  * Created by wangyuchao on 17/4/27.
  */
-public class TreeUtils {
+public class BinaryTreeUtils {
     // 先序递归遍历（中序递归遍历和后序递归遍历类似）
-    public static void preShow(BinaryTree root) {
+    public static void preShow(BinaryTreeNode root) {
         if (root != null) {
             System.out.print(root.data + " ");
             preShow(root.left);
@@ -16,9 +16,9 @@ public class TreeUtils {
     }
 
     // 先序遍历（非递归）
-    public static void preOrder(BinaryTree root) {
-        Stack<BinaryTree> s = new Stack<BinaryTree>();
-        BinaryTree p = root;
+    public static void preOrder(BinaryTreeNode root) {
+        Stack<BinaryTreeNode> s = new Stack<BinaryTreeNode>();
+        BinaryTreeNode p = root;
         while (p != null || (!s.isEmpty())) {
             while (p != null) {
                 System.out.print(p.data + " ");//访问
@@ -33,9 +33,9 @@ public class TreeUtils {
     }
 
     // 中序遍历（非递归）
-    public static void inOrder(BinaryTree root) {
-        Stack<BinaryTree> s = new Stack<BinaryTree>();
-        BinaryTree p = root;
+    public static void inOrder(BinaryTreeNode root) {
+        Stack<BinaryTreeNode> s = new Stack<BinaryTreeNode>();
+        BinaryTreeNode p = root;
         while (p != null || (!s.isEmpty())) {
             while (p != null) {
                 s.push(p);
@@ -50,10 +50,10 @@ public class TreeUtils {
     }
 
     // 后序遍历（非递归）
-    public static void afterOrder(BinaryTree root) {
-        Stack<BinaryTree> s = new Stack<BinaryTree>();
-        BinaryTree p = root;
-        BinaryTree q = p;
+    public static void afterOrder(BinaryTreeNode root) {
+        Stack<BinaryTreeNode> s = new Stack<BinaryTreeNode>();
+        BinaryTreeNode p = root;
+        BinaryTreeNode q = p;
         while (p != null || (!s.isEmpty())) {
             while (p != null) {
                 s.push(p);
@@ -75,13 +75,13 @@ public class TreeUtils {
     }
 
     // 数组转成叶子节点
-    public static BinaryTree[] convertToBinaryTreeNode(int[] arrays) {
+    public static BinaryTreeNode[] convertToBinaryTreeNode(int[] arrays) {
         int length = arrays.length;
 
         // 构造数据结构节点
-        BinaryTree[] allNodes = new BinaryTree[length];
+        BinaryTreeNode[] allNodes = new BinaryTreeNode[length];
         for (int i = 0; i < length; i++) {
-            BinaryTree temp = new BinaryTree(arrays[i]);
+            BinaryTreeNode temp = new BinaryTreeNode(arrays[i]);
             allNodes[i] = temp;
         }
 
@@ -89,7 +89,7 @@ public class TreeUtils {
     }
 
     // 数组生成树，返回树根
-    public static BinaryTree createBinaryTreeFromArray(BinaryTree[] allNodes) {
+    public static BinaryTreeNode createBinaryTreeFromArray(BinaryTreeNode[] allNodes) {
         int length = allNodes.length;
 
         // 构造树
@@ -104,7 +104,7 @@ public class TreeUtils {
     }
 
     // 获取二叉树的深度
-    public static int getDepth(BinaryTree root) {
+    public static int getDepth(BinaryTreeNode root) {
         if (root == null) {
             return 0;
         } else {
@@ -115,7 +115,7 @@ public class TreeUtils {
     }
 
     // 获取子节点个数
-    public static int getSubNodeNumber(BinaryTree root) {
+    public static int getSubNodeNumber(BinaryTreeNode root) {
         if (root == null) {
             return 0;
         } else {
@@ -126,7 +126,7 @@ public class TreeUtils {
     }
 
     // 获取第k层的节点个数,index 当前层号(k和index从0开始)
-    public static int getNumber(BinaryTree root, int index, int k) {
+    public static int getNumber(BinaryTreeNode root, int index, int k) {
         if (root == null) {
             return 0;
         } else {
@@ -144,12 +144,12 @@ public class TreeUtils {
     }
 
     // 得到一棵树的镜像
-    public static BinaryTree getMirror(BinaryTree root) {
+    public static BinaryTreeNode getMirror(BinaryTreeNode root) {
         if (root == null) {
             return null;
         } else {
-            BinaryTree left = getMirror(root.left);
-            BinaryTree right = getMirror(root.right);
+            BinaryTreeNode left = getMirror(root.left);
+            BinaryTreeNode right = getMirror(root.right);
             root.left = right;
             root.right = left;
             return root;
@@ -157,7 +157,7 @@ public class TreeUtils {
     }
 
     // 构建二叉排序树
-    public static BinaryTree createBinarySortTree(BinaryTree[] allNodes) {
+    public static BinaryTreeNode createBinarySortTree(BinaryTreeNode[] allNodes) {
         if (allNodes != null) {
             int length = allNodes.length;
             for (int i = 1; i < length; i++) {
@@ -169,7 +169,7 @@ public class TreeUtils {
     }
 
     // 插入二叉排序树
-    public static void insertBinarySortTree(BinaryTree root, BinaryTree node) {
+    public static void insertBinarySortTree(BinaryTreeNode root, BinaryTreeNode node) {
         while (root != null) {
             if (node.data >= root.data) {
                 if (root.right == null) {
@@ -193,12 +193,12 @@ public class TreeUtils {
     // 1. 如果node是叶子节点，直接删除
     // 2. 如果node只有一个子树，则子树直接替换node节点
     // 3. 如果node有两个子树，可用左子树替换node节点，右子树放在左子树的最右边节点下。（同理可用右子树替换node节点，左子树放在右子树的最左边节点下）
-    public static BinaryTree deleteBinarySortTreeNode(BinaryTree root, BinaryTree node) {
+    public static BinaryTreeNode deleteBinarySortTreeNode(BinaryTreeNode root, BinaryTreeNode node) {
         if (root != null && node != null) {
 
-            BinaryTree resultRoot = root;
+            BinaryTreeNode resultRoot = root;
 
-            BinaryTree fatherRoot = null;
+            BinaryTreeNode fatherRoot = null;
 
             // 先查找某个节点
             while (root != null) {
@@ -266,7 +266,7 @@ public class TreeUtils {
                             } else {
                                 fatherRoot.left = root.left;
                             }
-                            BinaryTree currentRoot = root;
+                            BinaryTreeNode currentRoot = root;
                             root = root.left;// 左子树
                             while (root.right != null) {
                                 root = root.right;
@@ -276,7 +276,7 @@ public class TreeUtils {
                         } else {
                             fatherRoot = root;
                             root = root.left;// 左子树
-                            BinaryTree newRoot = root;
+                            BinaryTreeNode newRoot = root;
                             while (root.right != null) {
                                 root = root.right;
                             }
@@ -290,13 +290,12 @@ public class TreeUtils {
         return null;
     }
 
-    // 平衡二叉树、完全二叉树、哈弗曼树、哈弗曼编码
     public static void main(String[] args) {
         int arrays[] = {0, 11, 22, 33, 44, 55, 66, 77, 88};
-        BinaryTree[] allNodes = convertToBinaryTreeNode(arrays);
+        BinaryTreeNode[] allNodes = convertToBinaryTreeNode(arrays);
 
         // 使用数组创建二叉树
-        BinaryTree root = createBinaryTreeFromArray(allNodes);
+        BinaryTreeNode root = createBinaryTreeFromArray(allNodes);
 
         // 子节点个数
         System.out.println("子节点个数：" + getSubNodeNumber(root));
@@ -322,8 +321,8 @@ public class TreeUtils {
 
         // 二叉查找树
         System.out.println("\n构建二叉查找树");
-        BinaryTree[] allNodesBST = convertToBinaryTreeNode(new int[]{6, 3, 5, 2, 8, 9, 1, 7, 0, 4});
-        BinaryTree rootBST = createBinarySortTree(allNodesBST);
+        BinaryTreeNode[] allNodesBST = convertToBinaryTreeNode(new int[]{6, 3, 5, 2, 8, 9, 1, 7, 0, 4});
+        BinaryTreeNode rootBST = createBinarySortTree(allNodesBST);
 
         System.out.println("中序遍历");
         inOrder(rootBST);
@@ -331,8 +330,8 @@ public class TreeUtils {
         System.out.println("\n删除某节点后，中序遍历");
         for (int i = 0; i < 10; i++) {
             System.out.println("\n--------" + i);
-            BinaryTree temp = createBinarySortTree(convertToBinaryTreeNode(new int[]{6, 3, 5, 2, 8, 9, 1, 7, 0, 4}));
-            BinaryTree deleteRoot = deleteBinarySortTreeNode(temp, new BinaryTree(i));
+            BinaryTreeNode temp = createBinarySortTree(convertToBinaryTreeNode(new int[]{6, 3, 5, 2, 8, 9, 1, 7, 0, 4}));
+            BinaryTreeNode deleteRoot = deleteBinarySortTreeNode(temp, new BinaryTreeNode(i));
             inOrder(deleteRoot);
         }
 

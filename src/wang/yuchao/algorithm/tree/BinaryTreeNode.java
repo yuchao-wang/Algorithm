@@ -3,12 +3,12 @@ package wang.yuchao.algorithm.tree;
 /**
  * Created by wangyuchao on 17/4/27.
  */
-public class BinaryTree {
+public class BinaryTreeNode {
     public int data;
-    public BinaryTree left;
-    public BinaryTree right;
+    public BinaryTreeNode left;
+    public BinaryTreeNode right;
 
-    public BinaryTree(int data) {
+    public BinaryTreeNode(int data) {
         this.data = data;
     }
 }
