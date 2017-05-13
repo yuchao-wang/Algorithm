@@ -7,7 +7,7 @@ import java.util.LinkedList;
 /**
  * Created by wangyuchao on 17/5/5.
  */
-public class HuffmanUtils {
+public class HuffmanTreeUtils {
 
     public static HuffmanTreeNode createHuffmanTree(LinkedList<HuffmanTreeNode> root) {
         while (root.size() > 1) {
@@ -53,5 +53,6 @@ public class HuffmanUtils {
         HuffmanTreeNode root = createHuffmanTree(linkedList);
 
         System.out.println("构建哈夫曼树成功");
+
     }
 }
