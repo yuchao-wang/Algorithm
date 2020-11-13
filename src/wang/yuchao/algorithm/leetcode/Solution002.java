@@ -108,10 +108,5 @@ public class Solution002 {
 
     public static void main(String[] args) {
         new Solution002().test();
-
-        ReentrantLock reentrantLock = new ReentrantLock();
-
-        reentrantLock.tryLock();
-        reentrantLock.lock();
     }
 }
