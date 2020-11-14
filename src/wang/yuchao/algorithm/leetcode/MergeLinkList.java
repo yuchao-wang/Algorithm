@@ -85,6 +85,36 @@ public class MergeLinkList {
         return head;
     }
 
+    public ListNode mergeTwo2(ListNode head1, ListNode head2) {
+
+        ListNode h1 = head1;
+        ListNode h2 = head2;
+
+        ListNode head = new ListNode(0);
+        ListNode result = head;
+
+        while (h1 != null && h2 != null) {
+            ListNode temp = null;
+            if (h1.val > h2.val) {
+                temp = h2;
+                h2 = h2.next;
+            } else {
+                temp = h1;
+                h1 = h1.next;
+            }
+
+            // 插入
+            head.next = temp;
+            head = head.next;
+        }
+
+        // 结果赋值
+        head.next = h1 == null ? h2 : h1;
+
+        return result.next;
+    }
+
+
     public static void main(String[] args) {
 
     }
