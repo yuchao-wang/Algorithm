@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class MergeLinkList {
 
-    public class ListNode {
+    public static class ListNode {
         int val;
         ListNode next;
 
@@ -94,18 +94,15 @@ public class MergeLinkList {
         ListNode result = head;
 
         while (h1 != null && h2 != null) {
-            ListNode temp = null;
             if (h1.val > h2.val) {
-                temp = h2;
+                head.next = h2;
                 h2 = h2.next;
+                head = head.next;
             } else {
-                temp = h1;
+                head.next = h1;
                 h1 = h1.next;
+                head = head.next;
             }
-
-            // 插入
-            head.next = temp;
-            head = head.next;
         }
 
         // 结果赋值
@@ -116,6 +113,16 @@ public class MergeLinkList {
 
 
     public static void main(String[] args) {
+        ListNode h1 = new ListNode(1);
+        h1.next = new ListNode(3);
+        h1.next.next = new ListNode(7);
 
+        ListNode h2 = new ListNode(2);
+        h2.next = new ListNode(4);
+        h2.next.next = new ListNode(5);
+        h2.next.next.next = new ListNode(6);
+
+        ListNode listNode = new MergeLinkList().mergeTwo2(h1, h2);
+        System.out.println(listNode.val);
     }
 }
